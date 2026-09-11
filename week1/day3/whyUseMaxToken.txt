@@ -1,0 +1,22 @@
+Without max_tokens set explicitly, you're at the mercy of whatever default limit the API applies
+ (which you just empirically discovered is somewhere around 3072 for this model/provider — you didn't set it,
+  it happened to you). Two real risks:
+
+1. Cost control. Remember — completion_tokens are the expensive ones (output costs more than input on
+ every provider). If a user sends an open-ended prompt like "explain everything about X" with no cap, the model 
+ could generate thousands of tokens you never intended to pay for. In production, at scale, 
+ this is exactly how AI features quietly blow through budgets — one careless prompt design times 100,000 users.
+
+2. Predictability. Right now, 
+your finish_reason for prompt2 was "length" — meaning the response was cut off by some limit you didn't choose. 
+If you're building an actual product (say, a PrintCraft customer support bot), you need to know and control 
+your response length ahead of time — both to fit UI constraints 
+(a chat bubble can't show an infinite wall of text) and to guarantee latency
+ (more tokens = more sequential generation time = slower response for the user waiting).
+
+
+ One nuance worth knowing:------->>> setting max_tokens doesn't make the model write a shorter,
+  more complete answer — it just cuts off wherever generation happens to be at that token count. 
+  If you actually want a genuinely concise answer (not just a truncated long one), 
+  that's a prompt engineering problem (e.g., "answer in under 3 sentences"), 
+ not a max_tokens problem. The two solve different things — worth not confusing them.

@@ -24,8 +24,15 @@ for p in prompts:
         "content": p
     }
     messages=[message];
-    response = client.chat.completions.create(model=model, messages=messages);
+    response = client.chat.completions.create(model=model, messages=messages,max_tokens=500);
     usage = response.usage;
     print("prompt usuage ---->", usage.prompt_tokens, "completion usage ---->", usage.completion_tokens, "total usage ---->", usage.total_tokens);
     finish_reason = response.choices[0].finish_reason
     print("finish_reason ---->", finish_reason)
+
+
+
+# max_tokens tells the API: "generate at most N tokens for the completion, then stop — regardless 
+# of whether you were 'done' thinking or not." It's a hard ceiling, not a target. The model might naturally 
+# finish earlier (finish_reason: stop) or get cut off at your ceiling (finish_reason: length) 
+# — but now you decided where that ceiling is, instead of an invisible default deciding for you.
