@@ -61,6 +61,9 @@ response_content_BY_LLM = response.choices[0].message.content;
 # Validation ---> after calling the API have to see what's in the response and validate it against the schema we defined
 try:
     parsed_ticket = SupportTicket.model_validate_json(response_content_BY_LLM);
+    print("✅ Parsed ticket object:", parsed_ticket)
+    print("Direct field access — urgency:", parsed_ticket.urgency)
+    print("Direct field access — issue_type:", parsed_ticket.issue_type)
 except Exception as e:
     print("Error occurred while validating JSON:", e)
 
