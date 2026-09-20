@@ -14,9 +14,10 @@ role="user"
 prompt1="hii"
 prompt2="Explain the future scope career of backend engineering in 2027 to future,AI-ENgineer,AI/ML,SDE"
 prompt3="write in 100 words should AI-AGENT STARTED TO MAKE FOR SDEBACKEND STRONG OR DSA TREE NEEDED??"
+prompt4 = "aap kaise ho, mujhe backend engineering ke baare mein bataiye"  # Hinglish
 
 # MAKING LIST OF PROMPTS TO SEND TO THE MODEL
-prompts=[prompt1,prompt2,prompt3];
+prompts=[prompt1,prompt2,prompt3,prompt4];
 for p in prompts:
     print(f"Sending prompt: {p}")
     message={
