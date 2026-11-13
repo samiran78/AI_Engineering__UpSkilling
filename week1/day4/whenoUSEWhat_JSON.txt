@@ -1,6 +1,6 @@
-model_json_schema()	model_validate_json()
-When	Before the API call	After the API call
-Input	Nothing (called on the class itself)	The raw JSON string response
-Output	A dict describing the schema	An actual instance of SupportTicket with real data
+model_json_schema()	                                                          model_validate_json()
+When->	Before the API                                                      call	After the API call
+Input->	Nothing (called on the class itself)	                            The raw JSON string response
+Output->A dict describing the schema	                               An actual instance of SupportTicket with real data
 Purpose	Tell the LLM what to produce	Verify + convert what the LLM actually produced
 Java analogy	Like generating an OpenAPI/Swagger schema for a DTO	Like objectMapper.readValue(jsonString, SupportTicket.class) — deserializing + validating JSON into a Java object

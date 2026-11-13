@@ -60,8 +60,8 @@ response = client.chat.completions.create(
 response_content_BY_LLM = response.choices[0].message.content;
 #VALIDATION -> After calling the API — have to see what's in the response and validate it against the schema we defined
 try:
-    parsed_ticket = supportTicket.model_validate_json(response_content);
-print("Response from LLM:", response_content);
-print("Finish reason:", response.choices[0].finish_reason)
+    parsed_ticket = supportTicket.model_validate_json(response_content_BY_LLM);
+except Exception as e:
+    print("Error occurred while validating JSON:", e)
 print("Repr of content:", repr(response.choices[0].message.content))
 print("Full usage:", response.usage)
